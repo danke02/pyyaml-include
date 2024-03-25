@@ -81,6 +81,8 @@ class YamlReader(Reader):
             self.anchors = loader.anchors
 
     def __call__(self):
+	from pathlib import Path
+        self._path = Path(self._path).expanduser().as_posix()
         with open(self._path, encoding=self._encoding) as fp:
             if self._persist_anchors:  # pragma: no cover
                 loader = self._loader_class(fp)
